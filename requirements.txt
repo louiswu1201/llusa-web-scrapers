@@ -1,0 +1,7 @@
+python=3.11
+numpy
+pandas
+bs4
+selenium
+requests
+webdriver-manager
