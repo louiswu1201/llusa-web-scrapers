@@ -155,35 +155,35 @@ def iterate_pages(brand_list):
 
 if __name__ == "__main__":
     # brands = ["biossance"]
-    # brands = ["augustinus-bader",
-    #           "biossance",
-    #           "caudalie",
-    #           "charlotte-tilbury",
-    #           "dr-dennis-gross-skincare",
-    #           "dr-jart",
-    #           "farmacy",
-    #           "fenty-skin-rihanna",
-    #           "fresh",
-    #           "gisou",
-    #           "glow-recipe",
-    #           "ilia",
-    #           "the-inkey-list",
-    #           "laneige",
-    #           "l-occitane",
-    #           "merit",
-    #           "moroccanoil",
-    #           "ole-henriksen",
-    #           "paulas-choice",
-    #           "sephora-collection",
-    #           "sk-ii",
-    #           "skinfix",
-    #           "sol-de-janeiro",
-    #           "stripes",
-    #           "sulwhasoo",
-    #           "summer-fridays",
-    #           "tatcha"]
-    # products = iterate_pages(brands)
-    products = scrape_product_page("https://www.sephora.com/product/kale-spinach-hyaluronic-acid-age-prevention-cream-P411388?skuId=1863604&icid2=products%20grid:p411388:product")
+    brands = ["augustinus-bader",
+              "biossance",
+              "caudalie",
+              "charlotte-tilbury",
+              "dr-dennis-gross-skincare",
+              "dr-jart",
+              "farmacy",
+              "fenty-skin-rihanna",
+              "fresh",
+              "gisou",
+              "glow-recipe",
+              "ilia",
+              "the-inkey-list",
+              "laneige",
+              "l-occitane",
+              "merit",
+              "moroccanoil",
+              "ole-henriksen",
+              "paulas-choice",
+              "sephora-collection",
+              "sk-ii",
+              "skinfix",
+              "sol-de-janeiro",
+              "stripes",
+              "sulwhasoo",
+              "summer-fridays",
+              "tatcha"]
+    products = iterate_pages(brands)
+    # products = scrape_product_page("https://www.sephora.com/product/protini-tm-polypeptide-cream-P427421?skuId=2025633&icid2=products%20grid:p427421:product")
     products = pd.DataFrame(products)
     products = products.drop_duplicates()
     products.to_csv(f"sephora_skincare_{date.today()}.csv", index=False)

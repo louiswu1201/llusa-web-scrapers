@@ -2,6 +2,6 @@ python=3.11
 numpy
 pandas
 bs4
-selenium
+selenium=4.15
 requests
 webdriver-manager
