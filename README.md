@@ -4,14 +4,13 @@ LLUSA Web Scrapers
 
 ## Description
 
-Retrieve the products and list prices for select skincare products on various retailers.
+Retrieve the names and prices of select skincare products at luxury beauty retailers.
 
 ## Scope
 
 * Ulta.com
 * Sephora.com
 * Macys.com
-* Dillards.com
 
 ## Dependencies
 

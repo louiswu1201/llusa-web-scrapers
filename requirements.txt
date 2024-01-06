@@ -4,4 +4,3 @@ pandas
 bs4
 selenium=4.15
 requests
-webdriver-manager
