@@ -15,17 +15,18 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 def get_soup(url, retailer):
     try:
-        if retailer == "sephora":
-            driver = webdriver.Chrome()
-            driver.get(url)
-            WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, "//span[contains(@data-at, 'product_name')]")))
-            page_content = driver.page_source
-            driver.quit()
-        else:
-            request = requests.get(url, headers=HEADERS) # add verify=False to arguments if in the office
-            request.raise_for_status()
-            time.sleep(random.random())
-            page_content = request.text
+        match retailer:
+            case "sephora":
+                driver = webdriver.Chrome()
+                driver.get(url)
+                WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, "//span[contains(@data-at, 'product_name')]")))
+                page_content = driver.page_source
+                driver.quit()
+            case _:
+                request = requests.get(url, headers=HEADERS) # add verify=False to arguments if in the office
+                request.raise_for_status()
+                time.sleep(random.random())
+                page_content = request.text
         return BeautifulSoup(page_content, "html.parser")
     except Exception as e:
         print(f"Exception: Failed to connect to {url}\n{e}")
@@ -99,8 +100,7 @@ def iterate_pages(urls, retailer):
 if __name__ == "__main__":
     retailers = ["sephora", "ulta", "macys"]
     for retailer in retailers:
-        urls = pd.read_csv(f"input/{retailer}_urls.csv", delimiter=",", header=None).iloc[0:2, 0].values.tolist()
+        urls = pd.read_csv(f"input/{retailer}_urls.csv", delimiter=",", header=None).iloc[:, 0].values.tolist()
         random.shuffle(urls)
-        products = iterate_pages(urls, retailer)
-        products = pd.DataFrame(products).drop_duplicates()
+        products = pd.DataFrame(iterate_pages(urls, retailer)).drop_duplicates()
         products.to_csv(f"output/{date.today()}_{retailer}_srps.csv", index=False)
